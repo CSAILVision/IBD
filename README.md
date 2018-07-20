@@ -27,30 +27,30 @@ Note that AlexNet models work with 227x227 image input, while VGG, ResNet, GoogL
 
 Note: The repo was written by pytorch-0.3.1. ([PyTorch](http://pytorch.org/), [Torchvision](https://github.com/pytorch/vision)) 
 
-## Run NetDissect in PyTorch
+## Run IBD in PyTorch
 
 * You can configure `settings.py` to load your own model, or change the default parameters.
 
-* Run NetDissect 
+* Run IBD 
 
 ```
-    python main.py
+    python3 main.py
 ```
 
 
-## NetDissect Result
+## IBD Result
 
-* At the end of the dissection script, a report will be generated inside `result` folder that summarizes the interpretable units of the tested network. These are, respectively, the HTML-formatted report, the semantics of the units of the layer summarized as a bar graph, visualizations of all the units of the layer (using zero-indexed unit numbers), and a CSV file containing raw scores of the top matching semantic concepts in each category for each unit of the layer.
+* At the end of the dissection script, a HTML-formatted report will be generated inside `result` folder that summarizes the interpretable units of the tested network. 
 
 
 ## Reference
 If you find the codes useful, please cite this paper
 ```
-@inproceedings{netdissect2017,
-  title={Network Dissection: Quantifying Interpretability of Deep Visual Representations},
-  author={Bau, David and Zhou, Bolei and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},
-  booktitle={Computer Vision and Pattern Recognition},
-  year={2017}
+@inproceedings{IBD2018,
+  title={Interpretable Basis Decomposition for Visual Explanation},
+  author={Zhou, Bolei* and Sun, Yiyou* and Bau, David* and Torralba, Antonio},
+  booktitle={European Conference on Computer Vision},
+  year={2018}
 }
 ```
 
