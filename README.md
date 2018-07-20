@@ -1,7 +1,7 @@
 # IBD: Interpretable Basis Decomposition for Visual Explanation
 
 ## Introduction
-This repository is ...
+This repository contains the demo code for the ECCV'18 paper "Interpretable Basis Decomposition for Visual Explanation".
 
 ## Download
 * Clone the code of Network Dissection Lite from github

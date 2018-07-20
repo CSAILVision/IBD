@@ -1,29 +1,27 @@
 ######### global settings  #########
-GPU = True     # running on GPU is highly suggested
-TEST_MODE = False                            # turning on the testmode means the code will run on a small dataset.
+GPU = True                                  # running on GPU is highly suggested
 CLEAN = False                               # set to "True" if you want to clean the temporary large files after generating result
-CATAGORIES = ["object", "part"]             # concept categories that are chosen to detect: "object", "part", "scene", "material", "texture", "color"
-APP = "classification"                      # "classification", "imagecap", "vqa"
+APP = "classification"                      # Do not change! mode choide: "classification", "imagecap", "vqa". Currently "imagecap" and "vqa" are not supported.
+CATAGORIES = ["object", "part"]             # Do not change! concept categories that are chosen to detect: "object", "part", "scene", "material", "texture", "color"
 
-QUANTILE = 0.005                            # the threshold used for activation
-CAM_THRESHOLD = 0.5
-SEG_THRESHOLD = 0.04                        # the threshold used for visualization
-CONCEPT_TOPN = 5
-FONT_PATH = "components/font.ttc"
-FONT_SIZE = 26
+CAM_THRESHOLD = 0.5                         # the threshold used for CAM visualization
+FONT_PATH = "components/font.ttc"           # font file path
+FONT_SIZE = 26                              # font size
+SEG_RESOLUTION = 7                          # the resolution of cam map
+BASIS_NUM = 7                               # In decomposition, this is to decide how many concepts are used to interpret the weight vector of a class.
 
-EPOCHS = 15
-SNAPSHOT_FREQ = 5
-SINGLE_LABEL = False
-SEG_RESOLUTION = 7
-COMPRESSED_INDEX = True
-BASIS_NUM = 7
+EPOCHS = 15                                 # max epochs to train the concept classifier
+SNAPSHOT_FREQ = 5                           # the frequence of making snapshot
+SINGLE_LABEL = False                        # Do not change.
+COMPRESSED_INDEX = True                     # Do not change.
 
 
+
+######### sub settings  #########
 if APP == "classification":
-    CAFFE_MODEL = False
-    CNN_MODEL = 'resnet18'  # model arch: wide_resnet18, resnet18, alexnet, resnet50, densenet161, vgg16CAM, caffenetCAM
-    DATASET = 'places365'  # model trained on: places365 or imagenet
+    CAFFE_MODEL = False                     # whether the model is transferred from "*.caffemodel".
+    CNN_MODEL = 'resnet18'                  # model arch: wide_resnet18, resnet18, alexnet, resnet50, densenet161, vgg16CAM, caffenetCAM
+    DATASET = 'places365'                   # model trained on: places365 or imagenet
     OUTPUT_FOLDER = "result/pytorch_"+CNN_MODEL+"_"+DATASET
 
     DATASET_PATH = 'components/sample_images'
@@ -58,7 +56,7 @@ if APP == "classification":
             MODEL_FILE = 'zoo/caffenet_places365.pth'
         elif CNN_MODEL == "vgg16":
             MODEL_FILE = 'zoo/vgg16_places365.pth'
-
+# Not implemented
 if APP == "imagecap":
     CAM = False
     GRAD_CAM = True
@@ -69,7 +67,7 @@ if APP == "imagecap":
     MAX_SENT_LEN = 20
     DATASET_PATH = '/home/sunyiyou/dataset/places365_standard'
     DATASET_INDEX_FILE = '/home/sunyiyou/dataset/places365_standard/val_sample.txt'
-
+# Not implemented
 if APP == "vqa":
     CAM = False
     GRAD_CAM = True
@@ -109,8 +107,7 @@ else:
     elif CNN_MODEL == 'densenet161' or CNN_MODEL == 'alexnet' or CNN_MODEL.startswith('vgg'):
         FEATURE_NAMES = ['features']
 
-
-
+TEST_MODE = False
 if TEST_MODE:
     WORKERS = 1
     BATCH_SIZE = 4
@@ -126,3 +123,4 @@ else:
     TALLY_BATCH_SIZE = 16
     TALLY_AHEAD = 4
     INDEX_FILE = 'index.csv'
+
