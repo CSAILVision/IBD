@@ -288,6 +288,8 @@ class concept_loader_factory:
                 negative_samples = np.load(cache_name)
             else:
                 #exclude positive samples
+                if not os.path.exists(os.path.join(settings.OUTPUT_FOLDER, 'sample_cache')):
+                    os.makedirs(os.path.join(settings.OUTPUT_FOLDER, 'sample_cache'))
                 unallowed_values = np.apply_along_axis(lambda ind: np.ravel_multi_index(ind, (b, h, w)), 1, positive_samples)
                 allowed_values = np.delete(np.arange(b * h * w), unallowed_values, None)
                 negative_samples = np.random.choice(allowed_values, min(len(allowed_values), sample_ratio * len(positive_samples)), replace=False)

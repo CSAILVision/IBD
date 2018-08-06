@@ -4,12 +4,8 @@ import torch
 from torch.autograd import Variable as V
 import torch.nn as nn
 from scipy.misc import imresize, imread, imsave
-import cv2
-from PIL import Image
-import settings
-import numpy as np
+
 import pickle
-import torch.nn.functional as F
 from sklearn.manifold import TSNE, SpectralEmbedding
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics.pairwise import cosine_similarity
