@@ -10,5 +10,8 @@ fo = FeatureOperator()
 features, _ = fo.feature_extraction(model=model)
 
 for layer_id, layer in enumerate(settings.FEATURE_NAMES):
+    settings.GPU = False
     feat_clf = SingleSigmoidFeatureClassifier(feature=features[layer_id], layer=layer, fo=fo)
     feat_clf.run()
+
+

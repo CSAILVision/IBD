@@ -34,14 +34,33 @@ Note: The repo was written by pytorch-0.3.1. ([PyTorch](http://pytorch.org/), [T
 * Run IBD 
 
 ```
-    python3 main.py
+    python3 test.py
 ```
-
 
 ## IBD Result
 
 * At the end of the dissection script, a HTML-formatted report will be generated inside `result` folder that summarizes the interpretable units of the tested network. 
 
+
+## Train Concept Basis
+
+* If you want to train the concept basis, delete the pretrained files first.
+```
+    rm result/pytorch_resnet18_places365/snapshot/14.pth 
+    rm result/pytorch_resnet18_places365/decompose.npy 
+
+```
+
+* Run the train script. 
+
+```
+    python3 train.py
+```
+* Then run IBD.
+
+```
+    python3 test.py
+```
 
 ## Reference
 If you find the codes useful, please cite this paper
