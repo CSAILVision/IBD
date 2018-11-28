@@ -1,4 +1,3 @@
-
 import os
 import torch
 from torch.autograd import Variable as V
@@ -231,10 +230,10 @@ class FeatureOperator:
             input_var = input_var.cuda()
         model.cnn.forward(input_var)
         img_feat = features_blobs[0]
-        v = V(torch.from_numpy(img_feat).cuda(async=True), requires_grad=True)
-        q = V(q.cuda(async=True), requires_grad=False)
-        # a = V(a.cuda(async=True), requires_grad=False)
-        q_len = V(q_len.cuda(async=True), requires_grad=False)
+        v = V(torch.from_numpy(img_feat).cuda(non_blocking=True), requires_grad=True)
+        q = V(q.cuda(non_blocking=True), requires_grad=False)
+        # a = V(a.cuda(non_blocking=True), requires_grad=False)
+        q_len = V(q_len.cuda(non_blocking=True), requires_grad=False)
         out = model(v, q, q_len)
         val, ind = out.max(1)
         val.backward(torch.FloatTensor([1]).cuda())
@@ -258,7 +257,7 @@ class FeatureOperator:
             input_var = input_var.cuda()
         model.cnn.forward(input_var)
         img_feat = features_blobs[0]
-        v = V(torch.from_numpy(img_feat).cuda(async=True), requires_grad=True)
+        v = V(torch.from_numpy(img_feat).cuda(non_blocking=True), requires_grad=True)
         sents, caps = model.generate(input_var)
         out, _ = model(input_var, sents[0])
         sents = np.array(sents).ravel()
